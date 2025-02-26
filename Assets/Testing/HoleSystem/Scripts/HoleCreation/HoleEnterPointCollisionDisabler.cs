@@ -22,13 +22,13 @@ namespace Testing.HoleSystem.Scripts.HoleCreation
                 }
             }
 
-            Collider otherCollider = other.GetComponent<Collider>();
-            if (otherCollider == null)
-            {
-                Debug.LogWarning("Collider not found on the object with the tag 'HoleEnterPoint'.");
-                return;
-            }
-            otherCollider.enabled = false;
+            // Collider otherCollider = other.GetComponent<Collider>();
+            // if (otherCollider == null)
+            // {
+            //     Debug.LogWarning("Collider not found on the object with the tag 'HoleEnterPoint'.");
+            //     return;
+            // }
+            // otherCollider.enabled = false;
             
             ConsumedObjectCount++;
             
