@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ccf223d1924d7ba8ba24f65504e0bb, type: 3}
+  m_Name: HoleData_Default
+  m_EditorClassIdentifier: 
+  <StartSize>k__BackingField: 1
+  <MaxSize>k__BackingField: 5
+  <SizeIncreaseFactorPerLevel>k__BackingField: 0.5
+  <ExperienceRequirementForFirstLevel>k__BackingField: 8
+  <ExperienceRequirementIncreaseFactor>k__BackingField: 1.5
+  <ExperienceRoundToFactor>k__BackingField: 2.5
+  <HoleDataPerLevel>k__BackingField:
+  - <Level>k__BackingField: 1
+    <ExperienceRequirementForNextLevel>k__BackingField: 8
+    <TotalSizeIncreaseFactor>k__BackingField: 1
+  - <Level>k__BackingField: 2
+    <ExperienceRequirementForNextLevel>k__BackingField: 12.5
+    <TotalSizeIncreaseFactor>k__BackingField: 1.5
+  - <Level>k__BackingField: 3
+    <ExperienceRequirementForNextLevel>k__BackingField: 20
+    <TotalSizeIncreaseFactor>k__BackingField: 2
+  - <Level>k__BackingField: 4
+    <ExperienceRequirementForNextLevel>k__BackingField: 30
+    <TotalSizeIncreaseFactor>k__BackingField: 2.5
+  - <Level>k__BackingField: 5
+    <ExperienceRequirementForNextLevel>k__BackingField: 45
+    <TotalSizeIncreaseFactor>k__BackingField: 3
+  - <Level>k__BackingField: 6
+    <ExperienceRequirementForNextLevel>k__BackingField: 67.5
+    <TotalSizeIncreaseFactor>k__BackingField: 3.5
+  - <Level>k__BackingField: 7
+    <ExperienceRequirementForNextLevel>k__BackingField: 100
+    <TotalSizeIncreaseFactor>k__BackingField: 4
+  - <Level>k__BackingField: 8
+    <ExperienceRequirementForNextLevel>k__BackingField: 150
+    <TotalSizeIncreaseFactor>k__BackingField: 4.5
+  - <Level>k__BackingField: 9
+    <ExperienceRequirementForNextLevel>k__BackingField: 225
+    <TotalSizeIncreaseFactor>k__BackingField: 5

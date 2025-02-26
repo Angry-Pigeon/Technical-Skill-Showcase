@@ -1,14 +1,17 @@
 ﻿using System;
+using Game.EatableObjects;
 using UnityEngine;
 namespace Testing.HoleSystem.Scripts.HoleCreation
 {
-    public class HoleEnterPointCollisionDisabler : MonoBehaviour
+    public class HoleEnterPointEatableCounter : MonoBehaviour
     {
-        public int ConsumedObjectCount = 0;
-        
+        public Action<EatableObject> OnObjectEaten;
         public GameObject[] IgnoreObjects;
         private void OnTriggerEnter(Collider other)
         {
+            if(!other.TryGetComponent(out EatableObject eatableObject)) return;
+            if(!eatableObject.CanBeEaten) return;
+            
             foreach (var obj in IgnoreObjects)
             {
                 if (obj == null)
@@ -21,16 +24,8 @@ namespace Testing.HoleSystem.Scripts.HoleCreation
                     return;
                 }
             }
-
-            // Collider otherCollider = other.GetComponent<Collider>();
-            // if (otherCollider == null)
-            // {
-            //     Debug.LogWarning("Collider not found on the object with the tag 'HoleEnterPoint'.");
-            //     return;
-            // }
-            // otherCollider.enabled = false;
-            
-            ConsumedObjectCount++;
+            eatableObject.Eat();
+            OnObjectEaten?.Invoke(eatableObject);
             
         }
     }
