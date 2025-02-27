@@ -12,7 +12,7 @@ Shader "Custom/HoleWriter" {
                 Pass Replace
             }
             // Don't output any color.
-            ColorMask 0
+//            ColorMask 0
             // Disable depth writes so this object doesn't occlude others.
             ZWrite Off
 
