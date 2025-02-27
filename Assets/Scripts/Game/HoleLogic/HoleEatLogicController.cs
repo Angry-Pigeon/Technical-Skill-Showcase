@@ -10,6 +10,20 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
     public class HoleEatLogicController : MonoBehaviour
     {
         [field: SerializeField]
+        public bool Player { get; private set; }
+        
+        [field: SerializeField]
+        public Renderer StencilRenderer { get; private set; }
+
+        [field: SerializeField]
+        public SpriteRenderer Circle { get; private set; }
+        
+        private int originalRenderQueue;
+        private int originalCircleRenderQueue;
+        
+        private int maximumQueueDifference = 100;
+        
+        [field: SerializeField]
         public HoleFallAreaEatableCounter HoleEatableCounter { get; private set; }
 
         
@@ -41,6 +55,7 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
             startSize = transform.localScale;
             GetCurrentHoleData();
             HoleEatableCounter.OnObjectEaten += OnObjectEaten;
+            InstanceStencilShader();
         }
 
         public void DeInitialize()
@@ -50,7 +65,6 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
 
         private void GetCurrentHoleData()
         {
-            // Retrieve the hole data corresponding to the current level.
             holeData = LevelSettingsDatabase.Instance().GetLevelSettings(-1).HoleData.GetHoleDataForLevel(CurrentLevel);
         }
 
@@ -62,23 +76,19 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
 
         private void CheckForLevelUp()
         {
-            // Do not level up if we've reached the maximum level.
             if (CurrentLevel >= LevelSettingsDatabase.Instance().GetLevelSettings(-1).HoleData.GetMaxLevel())
                 return;
 
-            // Check if we've accumulated enough experience to level up.
             if (CurrentExperience >= holeData.ExperienceRequirementForNextLevel)
             {
                 OnLevelUp();
             }
 
-            // Ensure experience doesn't go negative.
             if (CurrentExperience < 0)
             {
                 CurrentExperience = 0;
             }
 
-            // In case the player has enough experience to level up more than once.
             if (CurrentExperience >= holeData.ExperienceRequirementForNextLevel)
             {
                 CheckForLevelUp();
@@ -87,35 +97,54 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
 
         private void OnLevelUp()
         {
-            // Store the previous level's total size factor.
             float previousFactor = holeData.TotalSizeIncreaseFactor;
 
-            // Deduct the experience and increment the level.
             CurrentExperience -= holeData.ExperienceRequirementForNextLevel;
             CurrentLevel++;
 
-            // Update to the new level's data.
             GetCurrentHoleData();
             float newFactor = holeData.TotalSizeIncreaseFactor;
-
-            // Animate from the previous scale to the new scale.
+            ChangeOrderSizeDependingOnLevel();
             PlaySizeIncreaseTween(previousFactor, newFactor);
         }
 
         private void PlaySizeIncreaseTween(float previousFactor, float newFactor)
         {
-            // Calculate the sizes based on the startSize and the factors.
             Vector3 previousSize = startSize * previousFactor;
             Vector3 targetSize = startSize * newFactor;
 
-            // Kill any existing tween.
             sizeIncreaseTween?.Kill();
 
-            // Set the current scale to the previous size (in case it was modified).
             transform.localScale = previousSize;
 
-            // Animate to the target size.
             sizeIncreaseTween = transform.DOScale(targetSize, 1f).SetEase(Ease.OutBack);
+        }
+
+        private void InstanceStencilShader()
+        {
+            var stencilMatInstance = Instantiate(StencilRenderer.material);
+            StencilRenderer.material = stencilMatInstance;
+            
+            originalRenderQueue = stencilMatInstance.renderQueue;
+            StencilRenderer.material.renderQueue = originalRenderQueue;
+
+            originalCircleRenderQueue = Circle.sortingOrder;
+        }
+        
+        private void ChangeOrderSizeDependingOnLevel()
+        {
+            int offset = Mathf.Min((CurrentLevel - 1) * 10, maximumQueueDifference);
+
+            if (StencilRenderer != null && StencilRenderer.material != null)
+            {
+                StencilRenderer.material.renderQueue = originalRenderQueue - offset;
+            }
+
+            if (Circle != null && Circle.material != null)
+            {
+                Circle.material.renderQueue = originalCircleRenderQueue - offset;
+                Circle.sortingOrder = offset;
+            }
         }
 
     }
