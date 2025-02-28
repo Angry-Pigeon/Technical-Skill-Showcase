@@ -24,9 +24,11 @@ MonoBehaviour:
   Glass: {fileID: 2100000, guid: c29d9dff2056b1543bbb70ec32427a62, type: 2}
   A1: {fileID: 2100000, guid: 62e25ef75a2216f418d06453c9ad15cb, type: 2}
   A2: {fileID: 2100000, guid: 49ef76ea47782eb4b93ac08b234fd6c3, type: 2}
+  A4: {fileID: 2100000, guid: ee5d59fcc8497a641905c26644c20880, type: 2}
   GlassTrans: {fileID: 2100000, guid: 46d1c96c20b90724b8c139a80490421e, type: 2}
   A1Trans: {fileID: 2100000, guid: 6bd5eb67d84268440bc7e39952badb30, type: 2}
   A2Trans: {fileID: 2100000, guid: 59d027d57bd9e8a44b491e75ad88e6ce, type: 2}
+  A4Trans: {fileID: 2100000, guid: ebe2b061533f0c34c9b252f8aaae9d18, type: 2}
   DefaultLevelSettingsData:
     <Level>k__BackingField: -1
     <LevelSettings>k__BackingField: {fileID: 11400000, guid: 63c1478980cf1424ca636d84e0c1d6bf, type: 2}

@@ -42,6 +42,8 @@ namespace Game.HoleLogic
                     }
                 }
             }
+            
+            hiddenObjects.RemoveWhere(obj => obj == null);
 
             // For any object that was hidden in a previous frame but is no longer hit,
             // call Show and remove it from the hidden list.

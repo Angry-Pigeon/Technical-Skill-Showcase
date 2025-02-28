@@ -10,10 +10,13 @@ namespace Game.GameLogic
         public Material Glass;
         public Material A1;
         public Material A2;
+        public Material A4;
         
         public Material GlassTrans;
         public Material A1Trans;
         public Material A2Trans;
+        public Material A4Trans;
+
         
         public LevelSettingsData DefaultLevelSettingsData;
         [TableList]
