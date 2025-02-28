@@ -8,6 +8,11 @@ namespace Game.GameLogic
         [field: SerializeField]
         public HoleData HoleData { get; private set; }
 
+
+        
+
+        
+
         public HoleData GetHoleData()
         {
             return HoleData;
