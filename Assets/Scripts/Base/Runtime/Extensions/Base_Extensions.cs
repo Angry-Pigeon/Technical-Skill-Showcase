@@ -70,6 +70,18 @@ namespace Base {
             else
                 return !clamp ? x : Mathf.Clamp(x, to2, from2);
         }
+        
+        // public static float Remap(this float value, float inMin, float inMax, float outMin, float outMax)
+        // {
+        //     // Avoid division by zero
+        //     if (Mathf.Approximately(inMax, inMin))
+        //     {
+        //         Debug.LogWarning("inMax and inMin are too close or equal, returning outMin");
+        //         return outMin;
+        //     }
+        //     return (value - inMin) / (inMax - inMin) * (outMax - outMin) + outMin;
+        // }
+
 
 
         public static float ClampAngle(float angle, float min, float max) {
@@ -166,6 +178,23 @@ namespace Base {
 
             return bounds.center;
         }
+        
+        public static Vector3 Remap(this Vector3 value, Vector3 inMin, Vector3 inMax, Vector3 outMin, Vector3 outMax)
+        {
+            float x = value.x.Remap(inMin.x, inMax.x, outMin.x, outMax.x);
+            float y = value.y.Remap(inMin.y, inMax.y, outMin.y, outMax.y);
+            float z = value.z.Remap(inMin.z, inMax.z, outMin.z, outMax.z);
+            return new Vector3(x, y, z);
+        }
+        
+        public static Vector3 RemapToFloat(this float value, float inMin, float inMax, Vector3 outMin, Vector3 outMax)
+        {
+            float x = value.Remap(inMin, inMax, outMin.x, outMax.x);
+            float y = value.Remap(inMin, inMax, outMin.y, outMax.y);
+            float z = value.Remap(inMin, inMax, outMin.z, outMax.z);
+            return new Vector3(x, y, z);
+        }
+
 
         #endregion
 

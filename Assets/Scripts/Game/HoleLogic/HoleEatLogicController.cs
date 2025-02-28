@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace Testing.HoleSystem.Scripts.HoleLogic
 {
+    [DefaultExecutionOrder(10)]
     public class HoleEatLogicController : MonoBehaviour
     {
         [field: SerializeField]
@@ -18,27 +19,33 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
         [field: SerializeField]
         public SpriteRenderer Circle { get; private set; }
         
-        private int originalRenderQueue;
-        private int originalCircleRenderQueue;
-        
         private int maximumQueueDifference = 100;
         
         [field: SerializeField]
         public HoleFallAreaEatableCounter HoleEatableCounter { get; private set; }
 
-        
         [field: SerializeField]
         public int CurrentLevel { get; private set; } = 1;
 
         [field: SerializeField]
         public int CurrentExperience { get; private set; } = 0;
+        
+        /// <summary>
+        /// Sends in the previous level as a parameter.
+        /// </summary>
+        public Action<int> OnExperienceChanged;
+        /// <summary>
+        /// Sends in the previous level as a parameter.
+        /// </summary>
+        public Action<int> OnLevelChanged;
 
-
-
-        private HoleDataPerLevel holeData;
+        public HoleDataPerLevel holeData { get; private set; }
         private Vector3 startSize;
 
         private Tween sizeIncreaseTween;
+        
+        private int originalRenderQueue;
+        private int originalCircleRenderQueue;
 
         private void OnEnable()
         {
@@ -70,16 +77,18 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
 
         private void OnObjectEaten(EatableObject eatableObject)
         {
+            int previousExperience = CurrentExperience;
             CurrentExperience += eatableObject.Experience;
+            OnExperienceChanged?.Invoke(previousExperience);
             CheckForLevelUp();
         }
 
         private void CheckForLevelUp()
         {
-            if (CurrentLevel >= LevelSettingsDatabase.Instance().GetLevelSettings(-1).HoleData.GetMaxLevel())
+            if (CurrentLevel >= GetMaxLevel())
                 return;
 
-            if (CurrentExperience >= holeData.ExperienceRequirementForNextLevel)
+            if (CurrentExperience >= GetExperienceForNextLevel())
             {
                 OnLevelUp();
             }
@@ -89,7 +98,7 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
                 CurrentExperience = 0;
             }
 
-            if (CurrentExperience >= holeData.ExperienceRequirementForNextLevel)
+            if (CurrentExperience >= GetExperienceForNextLevel())
             {
                 CheckForLevelUp();
             }
@@ -97,15 +106,20 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
 
         private void OnLevelUp()
         {
+            int previousLevel = CurrentLevel;
+            int previousExperience = CurrentExperience;
             float previousFactor = holeData.TotalSizeIncreaseFactor;
 
-            CurrentExperience -= holeData.ExperienceRequirementForNextLevel;
+            CurrentExperience -= GetExperienceForNextLevel();
             CurrentLevel++;
 
             GetCurrentHoleData();
             float newFactor = holeData.TotalSizeIncreaseFactor;
             ChangeOrderSizeDependingOnLevel();
             PlaySizeIncreaseTween(previousFactor, newFactor);
+
+            OnExperienceChanged?.Invoke(0);
+            OnLevelChanged?.Invoke(previousLevel);
         }
 
         private void PlaySizeIncreaseTween(float previousFactor, float newFactor)
@@ -118,6 +132,16 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
             transform.localScale = previousSize;
 
             sizeIncreaseTween = transform.DOScale(targetSize, 1f).SetEase(Ease.OutBack);
+        }
+        
+        public int GetExperienceForNextLevel()
+        {
+            return holeData.ExperienceRequirementForNextLevel;
+        }
+        
+        public int GetMaxLevel()
+        {
+            return LevelSettingsDatabase.Instance().GetLevelSettings(-1).HoleData.GetMaxLevel();
         }
 
         private void InstanceStencilShader()
