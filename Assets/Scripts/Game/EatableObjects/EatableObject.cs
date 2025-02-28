@@ -11,6 +11,8 @@ namespace Game.EatableObjects
         [Inject]
         private SceneData sceneData;
         
+        public int MinimumLevelRequired = 1;
+        
         public int Experience = 1; 
         public bool CanBeEaten = true;
         

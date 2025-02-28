@@ -45,7 +45,7 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
         private Tween sizeIncreaseTween;
         
         private int originalRenderQueue;
-        private int originalCircleRenderQueue;
+        private int originalCircleRenderQueue = -100;
 
         private void OnEnable()
         {
@@ -63,6 +63,7 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
             GetCurrentHoleData();
             HoleEatableCounter.OnObjectEaten += OnObjectEaten;
             InstanceStencilShader();
+            
         }
 
         public void DeInitialize()
@@ -166,8 +167,7 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
 
             if (Circle != null && Circle.material != null)
             {
-                Circle.material.renderQueue = originalCircleRenderQueue - offset;
-                Circle.sortingOrder = offset;
+                Circle.sortingOrder = originalCircleRenderQueue - offset;
             }
         }
 

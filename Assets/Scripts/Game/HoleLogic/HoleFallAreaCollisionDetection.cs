@@ -42,7 +42,7 @@ namespace Testing.HoleSystem.Scripts.HoleCreation
                                 .AddTo(disposables);
                         }
                     }
-                    else if (collider.TryGetComponent(out EatableObject eatable) && eatable.CanBeEaten)
+                    else if (collider.TryGetComponent(out EatableObject eatable) && eatable.CanBeEaten && eatable.MinimumLevelRequired <= Parent.CurrentLevel)
                     {
                         eatable.SetIgnoreCollisionWithGround(true);
                     }

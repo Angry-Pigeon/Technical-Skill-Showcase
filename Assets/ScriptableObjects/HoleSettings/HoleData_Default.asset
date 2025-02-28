@@ -13,36 +13,39 @@ MonoBehaviour:
   m_Name: HoleData_Default
   m_EditorClassIdentifier: 
   <StartSize>k__BackingField: 1
-  <MaxSize>k__BackingField: 5
-  <SizeIncreaseFactorPerLevel>k__BackingField: 0.5
+  <MaxSize>k__BackingField: 8
+  <SizeIncreaseFactorPerLevel>k__BackingField: 0.75
   <ExperienceRequirementForFirstLevel>k__BackingField: 8
   <ExperienceRequirementIncreaseFactor>k__BackingField: 1.5
-  <ExperienceRoundToFactor>k__BackingField: 2.5
+  <ExperienceRoundToFactor>k__BackingField: 10
   <HoleDataPerLevel>k__BackingField:
   - <Level>k__BackingField: 1
     <ExperienceRequirementForNextLevel>k__BackingField: 8
     <TotalSizeIncreaseFactor>k__BackingField: 1
   - <Level>k__BackingField: 2
-    <ExperienceRequirementForNextLevel>k__BackingField: 12.5
-    <TotalSizeIncreaseFactor>k__BackingField: 1.5
+    <ExperienceRequirementForNextLevel>k__BackingField: 10
+    <TotalSizeIncreaseFactor>k__BackingField: 1.75
   - <Level>k__BackingField: 3
     <ExperienceRequirementForNextLevel>k__BackingField: 20
-    <TotalSizeIncreaseFactor>k__BackingField: 2
+    <TotalSizeIncreaseFactor>k__BackingField: 2.5
   - <Level>k__BackingField: 4
     <ExperienceRequirementForNextLevel>k__BackingField: 30
-    <TotalSizeIncreaseFactor>k__BackingField: 2.5
+    <TotalSizeIncreaseFactor>k__BackingField: 3.25
   - <Level>k__BackingField: 5
-    <ExperienceRequirementForNextLevel>k__BackingField: 45
-    <TotalSizeIncreaseFactor>k__BackingField: 3
-  - <Level>k__BackingField: 6
-    <ExperienceRequirementForNextLevel>k__BackingField: 67.5
-    <TotalSizeIncreaseFactor>k__BackingField: 3.5
-  - <Level>k__BackingField: 7
-    <ExperienceRequirementForNextLevel>k__BackingField: 100
+    <ExperienceRequirementForNextLevel>k__BackingField: 40
     <TotalSizeIncreaseFactor>k__BackingField: 4
+  - <Level>k__BackingField: 6
+    <ExperienceRequirementForNextLevel>k__BackingField: 60
+    <TotalSizeIncreaseFactor>k__BackingField: 4.75
+  - <Level>k__BackingField: 7
+    <ExperienceRequirementForNextLevel>k__BackingField: 90
+    <TotalSizeIncreaseFactor>k__BackingField: 5.5
   - <Level>k__BackingField: 8
-    <ExperienceRequirementForNextLevel>k__BackingField: 150
-    <TotalSizeIncreaseFactor>k__BackingField: 4.5
+    <ExperienceRequirementForNextLevel>k__BackingField: 140
+    <TotalSizeIncreaseFactor>k__BackingField: 6.25
   - <Level>k__BackingField: 9
-    <ExperienceRequirementForNextLevel>k__BackingField: 225
-    <TotalSizeIncreaseFactor>k__BackingField: 5
+    <ExperienceRequirementForNextLevel>k__BackingField: 210
+    <TotalSizeIncreaseFactor>k__BackingField: 7
+  - <Level>k__BackingField: 10
+    <ExperienceRequirementForNextLevel>k__BackingField: 320
+    <TotalSizeIncreaseFactor>k__BackingField: 8

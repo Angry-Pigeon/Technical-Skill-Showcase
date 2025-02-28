@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using Game.EatableObjects;
+using JetBrains.Annotations;
 using UnityEngine;
 namespace Testing.HoleSystem.Scripts.HoleCreation
 {
@@ -30,7 +32,15 @@ namespace Testing.HoleSystem.Scripts.HoleCreation
         public void EatObject(EatableObject eatableObject)
         {
             eatableObject.Eat();
+            StartCoroutine(IE_EatObject(eatableObject));
+        }
+        
+        private IEnumerator IE_EatObject(EatableObject eatableObject)
+        {
+            yield return new WaitForSeconds(1f);
             OnObjectEaten?.Invoke(eatableObject);
+            
+            Destroy(eatableObject.gameObject);
         }
     }
 }

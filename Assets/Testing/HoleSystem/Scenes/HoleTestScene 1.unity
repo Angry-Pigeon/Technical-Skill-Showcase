@@ -152,7 +152,7 @@ Transform:
   m_GameObject: {fileID: 9266127}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.5109136, z: -0, w: 0.859632}
-  m_LocalPosition: {x: -1.807115, y: 1, z: 2.4200835}
+  m_LocalPosition: {x: -1.07, y: 1, z: 0.54}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -172,7 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 9266131}
-  Experience: 3
+  MinimumLevelRequired: 2
+  Experience: 40
   CanBeEaten: 1
 --- !u!54 &9266130
 Rigidbody:
@@ -322,7 +323,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 18280222}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!54 &18280221
 Rigidbody:
@@ -577,7 +579,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 103991193}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!54 &103991192
 Rigidbody:
@@ -727,7 +730,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 110974397}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!54 &110974396
 Rigidbody:
@@ -1623,7 +1627,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 302740559}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!1 &311288541
 GameObject:
@@ -1675,7 +1680,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 311288545}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!54 &311288544
 Rigidbody:
@@ -1985,6 +1991,170 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 383110017}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &394881915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 394881916}
+  - component: {fileID: 394881921}
+  - component: {fileID: 394881920}
+  - component: {fileID: 394881919}
+  - component: {fileID: 394881918}
+  - component: {fileID: 394881917}
+  - component: {fileID: 394881922}
+  m_Layer: 8
+  m_Name: BigCube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &394881916
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394881915}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.5109136, z: -0, w: 0.859632}
+  m_LocalPosition: {x: -2.44, y: 8.25, z: 11.64}
+  m_LocalScale: {x: 3, y: 15, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1240210765}
+  m_LocalEulerAnglesHint: {x: 0, y: 61.449, z: 0}
+--- !u!114 &394881917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394881915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb1c439b303c47cc80010fdc428804a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Colliders:
+  - {fileID: 394881919}
+  MinimumLevelRequired: 7
+  Experience: 40
+  CanBeEaten: 1
+--- !u!54 &394881918
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394881915}
+  serializedVersion: 4
+  m_Mass: 500
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &394881919
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394881915}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &394881920
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394881915}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: d0178fa9cb5521b4585f97072d0456c1, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &394881921
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394881915}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &394881922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394881915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a8905eebc9d41c9827126d8b9d15e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &399810762
 GameObject:
   m_ObjectHideFlags: 0
@@ -3043,6 +3213,7 @@ MonoBehaviour:
   - {fileID: 399810765}
   - {fileID: 488273725}
   - {fileID: 1067279486}
+  MinimumLevelRequired: 1
   Experience: 30
   CanBeEaten: 1
   <Parent>k__BackingField: {fileID: 777774374}
@@ -3584,7 +3755,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 649277704}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!1 &702403026
 GameObject:
@@ -4678,7 +4850,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 928139406}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!1 &984447348
 GameObject:
@@ -4861,7 +5034,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 998855730}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!1 &999217330
 GameObject:
@@ -5139,7 +5313,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 1026173230}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!1 &1050053761
 GameObject:
@@ -5289,7 +5464,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 1050053764}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!1 &1067279483
 GameObject:
@@ -5318,8 +5494,8 @@ Transform:
   m_GameObject: {fileID: 1067279483}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.82, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 2}
+  m_LocalPosition: {x: 0, y: -0.775, z: 0}
+  m_LocalScale: {x: 1.3636, y: 0.6818, z: 1.3636}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1983355661}
@@ -5591,7 +5767,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 1088552360}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!1 &1115182669
 GameObject:
@@ -5946,7 +6123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 1183533669}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!1 &1186032516
 GameObject:
@@ -6310,6 +6488,7 @@ Transform:
   - {fileID: 311288542}
   - {fileID: 1088552358}
   - {fileID: 110974394}
+  - {fileID: 394881916}
   - {fileID: 302740557}
   - {fileID: 9266128}
   m_Father: {fileID: 798366348}
@@ -6704,7 +6883,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 1407704314}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!54 &1407704313
 Rigidbody:
@@ -7220,7 +7400,7 @@ Transform:
   m_GameObject: {fileID: 1580158538}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071058, y: -0, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 0, y: 0.01, z: 0}
+  m_LocalPosition: {x: 0, y: 0.001, z: 0}
   m_LocalScale: {x: 0.49999997, y: 0.49999994, z: 0.49999994}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -7266,7 +7446,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: ebc82bb9dacba0f478d2a059e9181886, type: 3}
   m_Color: {r: 0, g: 0.58431375, b: 1, a: 1}
   m_FlipX: 0
@@ -7394,6 +7574,7 @@ GameObject:
   - component: {fileID: 1636131489}
   - component: {fileID: 1636131490}
   - component: {fileID: 1636131491}
+  - component: {fileID: 1636131492}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -7473,6 +7654,20 @@ MonoBehaviour:
   <MaximumValue>k__BackingField: {x: 0, y: 15, z: -12}
   <Debug>k__BackingField: 0
   <DebugPercentage>k__BackingField: 0
+--- !u!114 &1636131492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636131488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c913e51307434f209b5d547af1d18e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  castRadius: 1.5
+  castDistance: 30
 --- !u!1 &1657240032
 GameObject:
   m_ObjectHideFlags: 0
@@ -7734,7 +7929,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 1707050931}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!54 &1707050930
 Rigidbody:
@@ -8018,7 +8214,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 1819152527}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!54 &1819152526
 Rigidbody:
@@ -8168,7 +8365,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 1841975179}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!54 &1841975178
 Rigidbody:
@@ -8658,7 +8856,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 1927937545}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!1 &1959875058
 GameObject:
@@ -9152,7 +9351,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 2075100542}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!1 &2096131823
 GameObject:
@@ -9204,7 +9404,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Colliders:
   - {fileID: 2096131827}
-  Experience: 3
+  MinimumLevelRequired: 1
+  Experience: 40
   CanBeEaten: 1
 --- !u!54 &2096131826
 Rigidbody:

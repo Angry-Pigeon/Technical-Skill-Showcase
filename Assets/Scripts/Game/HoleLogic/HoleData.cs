@@ -59,7 +59,8 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
 
                 // Update current size and experience for the next level.
                 currentSize += sizeIncrease;
-                currentExpRequirement *= (int)ExperienceRequirementIncreaseFactor;
+                currentExpRequirement = Mathf.RoundToInt(currentExpRequirement * ExperienceRequirementIncreaseFactor);
+                
                 currentExpRequirement = (int)currentExpRequirement.RoundTo(ExperienceRoundToFactor);
                 level++;
             }
