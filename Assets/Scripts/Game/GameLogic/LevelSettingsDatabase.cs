@@ -7,6 +7,14 @@ namespace Game.GameLogic
     [CreateAssetMenu(fileName = "LevelSettingsDatabase", menuName = "Game/Level/Level Settings Database", order = 0)]
     public class LevelSettingsDatabase : SerializedResourcedScriptableObject<LevelSettingsDatabase>
     {
+        public Material Glass;
+        public Material A1;
+        public Material A2;
+        
+        public Material GlassTrans;
+        public Material A1Trans;
+        public Material A2Trans;
+        
         public LevelSettingsData DefaultLevelSettingsData;
         [TableList]
         public List<LevelSettingsData> LevelSettingsData;
