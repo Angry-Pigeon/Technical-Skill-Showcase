@@ -1,4 +1,5 @@
-﻿using Game.SceneDataLogic;
+﻿using System;
+using Game.SceneDataLogic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
@@ -7,6 +8,8 @@ namespace Game.EatableObjects
     public class EatableObject : MonoBehaviour
     {
         public Collider[] Colliders;
+
+        private Rigidbody rb;
         
         [Inject]
         private SceneData sceneData;
@@ -15,7 +18,14 @@ namespace Game.EatableObjects
         
         public int Experience = 1; 
         public bool CanBeEaten = true;
-        
+
+        protected virtual void OnEnable()
+        {
+            rb = GetComponent<Rigidbody>();
+            if(rb == null) return;
+            rb.isKinematic = true;
+        }
+
         public virtual void Eat()
         {
             if (!CanBeEaten) return;
@@ -24,6 +34,10 @@ namespace Game.EatableObjects
         
         public void SetIgnoreCollisionWithGround(bool value)
         {
+            if (value)
+            {
+                rb.isKinematic = false;
+            }
             foreach (var collider in Colliders)
             {
                 Physics.IgnoreCollision(collider, sceneData.GroundCollider, value);

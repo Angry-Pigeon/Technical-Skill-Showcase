@@ -7,6 +7,11 @@ namespace Game.EatableObjects
         [field: SerializeField]
         public HoleEatLogicController Parent { get; private set; }
 
+        protected override void OnEnable()
+        {
+            
+        }
+
         public override void Eat()
         {
             base.Eat();

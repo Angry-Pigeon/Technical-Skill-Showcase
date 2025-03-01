@@ -63,7 +63,7 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
             GetCurrentHoleData();
             HoleEatableCounter.OnObjectEaten += OnObjectEaten;
             InstanceStencilShader();
-            
+            SetSizeAndLevelAtStart();
         }
 
         public void DeInitialize()
@@ -112,6 +112,7 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
             float previousFactor = holeData.TotalSizeIncreaseFactor;
 
             CurrentExperience -= GetExperienceForNextLevel();
+            CurrentExperience = Mathf.Max(0, CurrentExperience);
             CurrentLevel++;
 
             GetCurrentHoleData();
@@ -121,6 +122,12 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
 
             OnExperienceChanged?.Invoke(0);
             OnLevelChanged?.Invoke(previousLevel);
+        }
+
+        private void SetSizeAndLevelAtStart()
+        {
+            ChangeOrderSizeDependingOnLevel();
+            PlaySizeIncreaseTween(1, holeData.TotalSizeIncreaseFactor);
         }
 
         private void PlaySizeIncreaseTween(float previousFactor, float newFactor)

@@ -37,7 +37,7 @@ namespace Testing.HoleSystem.Scripts.HoleCreation
         
         private IEnumerator IE_EatObject(EatableObject eatableObject)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             OnObjectEaten?.Invoke(eatableObject);
             
             Destroy(eatableObject.gameObject);
