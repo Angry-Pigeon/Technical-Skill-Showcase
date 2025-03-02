@@ -7,6 +7,12 @@ using Sirenix.Serialization;
 using UnityEngine;
 namespace Tool_Development.SerializableScriptableObject.Scripts
 {
+    public enum SaveDataEnumExample
+    {
+        Example1,
+        Example2,
+        Example3
+    }
     [CreateAssetMenu(fileName = "NewSaveData", menuName = "Save/New Save Data", order = 0)]
     [Serializable]
     public class SerializedSaveData : SerializedScriptableObject

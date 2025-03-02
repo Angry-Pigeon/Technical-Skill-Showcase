@@ -45,22 +45,22 @@ namespace Base.Runtime.Utility
             //if the renderer material is same as Glass or A1 or A2, change it to GlassTrans or A1Trans or A2Opaque
             foreach (var renderer in renderers)
             {
-                if (renderer.sharedMaterial.name == LevelSettingsDatabase.Instance().Glass.name) //if the material is Glass
-                {
-                    renderer.sharedMaterial = LevelSettingsDatabase.Instance().GlassTrans;
-                }
-                else if (renderer.sharedMaterial.name == LevelSettingsDatabase.Instance().A1.name) //if the material is A1
-                {
-                    renderer.sharedMaterial = LevelSettingsDatabase.Instance().A1Trans;
-                }
-                else if (renderer.sharedMaterial.name == LevelSettingsDatabase.Instance().A2.name) //if the material is A2
-                {
-                    renderer.sharedMaterial = LevelSettingsDatabase.Instance().A2Trans;
-                }
-                if (renderer.sharedMaterial.name == LevelSettingsDatabase.Instance().A4.name) //if the material is A3
-                {
-                    renderer.sharedMaterial = LevelSettingsDatabase.Instance().A4Trans;
-                }
+                // if (renderer.sharedMaterial.name == LevelSettingsDatabase.Instance().Glass.name) //if the material is Glass
+                // {
+                //     renderer.sharedMaterial = LevelSettingsDatabase.Instance().GlassTrans;
+                // }
+                // else if (renderer.sharedMaterial.name == LevelSettingsDatabase.Instance().A1.name) //if the material is A1
+                // {
+                //     renderer.sharedMaterial = LevelSettingsDatabase.Instance().A1Trans;
+                // }
+                // else if (renderer.sharedMaterial.name == LevelSettingsDatabase.Instance().A2.name) //if the material is A2
+                // {
+                //     renderer.sharedMaterial = LevelSettingsDatabase.Instance().A2Trans;
+                // }
+                // if (renderer.sharedMaterial.name == LevelSettingsDatabase.Instance().A4.name) //if the material is A3
+                // {
+                //     renderer.sharedMaterial = LevelSettingsDatabase.Instance().A4Trans;
+                // }
             }
             
             Debug.Log($"Materials switched on {selectedObject}.");
