@@ -6,7 +6,7 @@ namespace Game.EatableObjects
     public class HideableObject : MonoBehaviour
     {
         private float[] initialAlphaValues;
-        private const float minimumAlphaValue = 0.3f;
+        private const float minimumAlphaValue = 0.1f;
         private Renderer[] renderers;
         
         private void Awake()

@@ -37,6 +37,13 @@ namespace Game.EatableObjects
             if (value)
             {
                 rb.isKinematic = false;
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+            else
+            {
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
             }
             foreach (var collider in Colliders)
             {
