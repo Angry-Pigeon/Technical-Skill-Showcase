@@ -11,9 +11,6 @@ namespace Game.EatableObjects
 
         private Rigidbody rb;
         
-        [Inject]
-        private SceneData sceneData;
-        
         public int MinimumLevelRequired = 1;
         
         public int Experience = 1; 
@@ -47,7 +44,7 @@ namespace Game.EatableObjects
             }
             foreach (var collider in Colliders)
             {
-                Physics.IgnoreCollision(collider, sceneData.GroundCollider, value);
+                Physics.IgnoreCollision(collider, SceneDataContext.instance.GroundCollider, value);
             }
         }
         

@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.GameLogic;
+using Game.GameLogic.Managers;
 using Game.SceneDataLogic;
 using UnityEngine;
 using Zenject;
@@ -12,14 +13,12 @@ namespace Game.JoystickController
         public float MovementSpeed { get; private set; } = 5f;
         [field: SerializeField]
         public Collider ObjectCollider { get; private set; }
-
-        [Inject]
-        private SceneData SceneData;
+        
         private Joystick joystick;
 
         private void OnEnable()
         {
-            joystick = SceneData.Joystick;
+            joystick = GameLogic.Managers.GameEvents.Game.GetBootStrapperContext().Joystick;
             if (ObjectCollider == null)
                 ObjectCollider = GetComponent<Collider>();
         }
@@ -38,7 +37,7 @@ namespace Game.JoystickController
                 movement.Normalize();
 
             Vector3 moveDelta = movement * MovementSpeed * Time.deltaTime;
-            Bounds worldBounds = SceneData.WorldBounds;
+            Bounds worldBounds = SceneDataContext.instance.WorldBounds;
 
             Bounds newColliderBounds = new Bounds(ObjectCollider.bounds.center + moveDelta, ObjectCollider.bounds.size);
 

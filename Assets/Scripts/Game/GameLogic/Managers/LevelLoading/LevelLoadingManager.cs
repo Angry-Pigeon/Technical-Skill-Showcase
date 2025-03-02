@@ -60,7 +60,7 @@ namespace Game.GameLogic.Managers
         public IEnumerator IE_LoadLevel(int levelIndex)
         {
             ClearLevel();
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForSeconds(0.2f);
             
             LevelSettingsData data = LevelSettingsDatabase.GetLevelSettingCycle(levelIndex);
             if (data == null)
@@ -76,6 +76,10 @@ namespace Game.GameLogic.Managers
         
         public IEnumerator IE_LoadNextLevel()
         {
+            ClearLevel();
+            yield return new WaitForSeconds(0.2f);
+            
+            
             int nextLevelIndex = _saveSystemManager.GetSaveData<GameDataSave>(GameSaveType.GameData).Level;
             nextLevelIndex++;
             yield return IE_LoadLevel(nextLevelIndex);

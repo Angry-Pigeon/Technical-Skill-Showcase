@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.GameLogic.Managers;
 using Game.SceneDataLogic;
 using UnityEngine;
 using Zenject;
@@ -6,24 +7,19 @@ namespace Game.HoleLogic
 {
     public class HoleArrowIndicator : MonoBehaviour
     {
-        [Inject]
-        private SceneData SceneData;
-
         private Joystick joystick;
         
         public float RotationEasing = 12f;
         
         private void OnEnable()
         {
-            
+            joystick = GameLogic.Managers.GameEvents.Game.GetBootStrapperContext().Joystick;
         }
 
         private void Update()
         {
-            if (SceneData == null)
-                return;
             
-            Vector3 direction = SceneData.Joystick.Direction;
+            Vector3 direction = joystick.Direction;
 
             direction.z = direction.y;
             direction.y = 0;

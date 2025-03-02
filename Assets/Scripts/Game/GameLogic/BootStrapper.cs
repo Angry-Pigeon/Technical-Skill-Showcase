@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Game.GameLogic.Managers;
+using Game.GameLogic.Managers.SaveData;
+using Game.GameLogic.Managers.UISystems;
 using UnityEngine;
 using Zenject;
 namespace Game.GameLogic
@@ -11,9 +14,29 @@ namespace Game.GameLogic
         private SaveSystemManager _saveSystemManager;
         [Inject]
         private LevelLoadingManager _sceneLoaderManager;
+        [Inject]
+        private UIManager _uiManager;
+        
+        [Inject]
+        private BootStrapperContext bootStrapperContext;
         
         private List<Manager_Base> _managers = new List<Manager_Base>();
-        
+
+        private void Awake()
+        {
+            Managers.GameEvents.Game.Initialize(this);
+        }
+
+        private void Start()
+        {
+            StartCoroutine(IE_SimulateLoading());
+        }
+
+        private void OnDisable()
+        {
+            Dispose();
+        }
+
         private IEnumerator IE_SimulateLoading()
         {
             yield return IE_Initialize();
@@ -22,10 +45,12 @@ namespace Game.GameLogic
         
         private IEnumerator IE_Initialize()
         {
+            
             _managers = new List<Manager_Base>
             {
                 _saveSystemManager,
-                _sceneLoaderManager
+                _sceneLoaderManager,
+                _uiManager
             };
             _managers.Sort((a, b) => a.Priority.CompareTo(b.Priority));
             
@@ -35,6 +60,7 @@ namespace Game.GameLogic
         private IEnumerator IE_PostInitialize()
         {
             yield return IE_PostInitializeManagers();
+            _uiManager.ShowPanel(UIPanelType.StartPanel);
         }
         
         private IEnumerator IE_Pause()
@@ -121,5 +147,99 @@ namespace Game.GameLogic
             }
         }
         
+        public void StartGame()
+        {
+            StartCoroutine(IE_StartGame());
+        }
+
+        public IEnumerator IE_StartGame()
+        {
+            int currentLevel = _saveSystemManager.GetSaveData<GameDataSave>(GameSaveType.GameData).Level;
+            int previewLevel = _saveSystemManager.GetSaveData<GameDataSave>(GameSaveType.GameData).LevelPreview;
+
+            _uiManager.ShowPanel(UIPanelType.LoadingPanel);
+            
+            yield return _sceneLoaderManager.IE_LoadLevel(currentLevel);
+
+            yield return new WaitForFixedUpdate();
+            
+            _uiManager.ShowPanel(UIPanelType.GamePanel);
+            _uiManager.ShowPanel(UIPanelType.SettingsPanel, false);
+            
+
+        }
+
+        public void NextLevel()
+        {
+            StartCoroutine(IE_NextLevel());
+        }
+
+        private IEnumerator IE_NextLevel()
+        {
+            _uiManager.ShowPanel(UIPanelType.LoadingPanel);
+            
+            yield return _sceneLoaderManager.IE_LoadNextLevel();
+
+            yield return new WaitForFixedUpdate();
+            
+            _uiManager.ShowPanel(UIPanelType.GamePanel);
+            _uiManager.ShowPanel(UIPanelType.SettingsPanel, false);
+        }
+        public void RestartLevel()
+        {
+            StartCoroutine(IE_RestartLevel());
+        }
+        
+        private IEnumerator IE_RestartLevel()
+        {
+            int currentLevel = _saveSystemManager.GetSaveData<GameDataSave>(GameSaveType.GameData).Level;
+            int previewLevel = _saveSystemManager.GetSaveData<GameDataSave>(GameSaveType.GameData).LevelPreview;
+
+            _uiManager.ShowPanel(UIPanelType.LoadingPanel);
+            
+            yield return _sceneLoaderManager.IE_LoadLevel(currentLevel);
+
+            yield return new WaitForFixedUpdate();
+            
+            _uiManager.ShowPanel(UIPanelType.GamePanel);
+            _uiManager.ShowPanel(UIPanelType.SettingsPanel, false);
+        }
+
+
+        public void EndGame(bool win)
+        {
+            StartCoroutine(IE_EndGame(win));
+        }
+        
+        private IEnumerator IE_EndGame(bool win)
+        {
+            if (win)
+            {
+                int currentLevel = _saveSystemManager.GetSaveData<GameDataSave>(GameSaveType.GameData).Level;
+                int previewLevel = _saveSystemManager.GetSaveData<GameDataSave>(GameSaveType.GameData).LevelPreview;
+                
+                _saveSystemManager.GetSaveData<GameDataSave>(GameSaveType.GameData).Level = currentLevel + 1;
+                _saveSystemManager.GetSaveData<GameDataSave>(GameSaveType.GameData).LevelPreview = previewLevel + 1;
+                
+                _uiManager.ShowPanel(UIPanelType.WinPanel);
+                yield return null;
+            }
+            else
+            {
+                _uiManager.ShowPanel(UIPanelType.LosePanel);
+                yield return null;
+            }
+        }
+
+
+        public int GetPreviewLevel()
+        {
+            return _saveSystemManager.GetSaveData<GameDataSave>(GameSaveType.GameData).LevelPreview;
+        }
+        
+        public BootStrapperContext GetBootStrapperContext()
+        {
+            return bootStrapperContext;
+        }
     }
 }

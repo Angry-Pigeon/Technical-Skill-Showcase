@@ -1,5 +1,10 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using Game.GameLogic.Managers.SaveData;
+using Sirenix.Utilities;
+using TMPro;
 using UnityEngine;
+using Zenject;
 namespace Game.GameLogic.Managers.UISystems
 {
     public enum UIPanelType
@@ -8,7 +13,8 @@ namespace Game.GameLogic.Managers.UISystems
         GamePanel,
         SettingsPanel,
         WinPanel,
-        LosePanel
+        LosePanel,
+        LoadingPanel
     }
     public class UIManager : Manager_Base
     {
@@ -18,10 +24,28 @@ namespace Game.GameLogic.Managers.UISystems
         public CanvasGroup SettingsPanel;
         public CanvasGroup WinPanel;
         public CanvasGroup LosePanel;
+        public CanvasGroup LoadingPanel;
+        
+        public TMP_Text PreviewLevelText;
+        
+        private Dictionary<UIPanelType, CanvasGroup> _panels = new Dictionary<UIPanelType, CanvasGroup>();
         
         public override IEnumerator Initialize()
         {
             State = ManagerState.InitializationStarted;
+            
+            _panels = new Dictionary<UIPanelType, CanvasGroup>
+            {
+                {UIPanelType.StartPanel, StartPanel},
+                {UIPanelType.GamePanel, GamePanel},
+                {UIPanelType.SettingsPanel, SettingsPanel},
+                {UIPanelType.WinPanel, WinPanel},
+                {UIPanelType.LosePanel, LosePanel},
+                {UIPanelType.LoadingPanel, LoadingPanel}
+            };
+            
+            ShowPanel(UIPanelType.LoadingPanel);
+            
             yield return null;
             State = ManagerState.Initialized;
         }
@@ -29,6 +53,8 @@ namespace Game.GameLogic.Managers.UISystems
         {
             State = ManagerState.PostInitializationStarted;
             yield return null;
+            PreviewLevelText.text = $"Level :{GameEvents.Game.GetPreviewLevel()}";
+            
             State = ManagerState.PostInitialized;
         }
         public override IEnumerator Pause()
@@ -55,10 +81,37 @@ namespace Game.GameLogic.Managers.UISystems
         {
             yield return null;
         }
-
         public override void Dispose()
         {
             State = ManagerState.Disposed;
+        }
+        
+        public CanvasGroup GetPanel(UIPanelType panelType)
+        {
+            if (!_panels.ContainsKey(panelType))
+            {
+                Debug.LogError($"Panel with type {panelType} not found.");
+                return null;
+            }
+            return _panels[panelType];
+        }
+        
+        public void ShowPanel(UIPanelType panelType, bool hideOtherPanels = true)
+        {
+            if (hideOtherPanels)
+            {
+                _panels.ForEach( panel => panel.Value.SetActive(false));
+            }
+            var panel = GetPanel(panelType);
+            if (panel == null) return;
+            panel.SetActive(true);
+        }
+        
+        public void HidePanel(UIPanelType panelType)
+        {
+            var panel = GetPanel(panelType);
+            if (panel == null) return;
+            panel.SetActive(false);
         }
     }
 }

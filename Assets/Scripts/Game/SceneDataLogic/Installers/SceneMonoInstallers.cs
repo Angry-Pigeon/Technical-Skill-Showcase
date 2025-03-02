@@ -4,11 +4,11 @@ namespace Game.SceneDataLogic.Installers
 {
     public class SceneMonoInstallers : MonoInstaller
     {
-        public SceneData SceneData;
+        [FormerlySerializedAs("SceneData")] public SceneDataContext SceneDataContext;
 
         public override void InstallBindings()
         {
-            Container.Bind<SceneData>().FromInstance(SceneData).AsSingle();
+            
         }
     }
 }
