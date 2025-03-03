@@ -28,6 +28,11 @@ public class DinoGameWindow : EditorWindow
     public Vector2 flyingObstacleHeightRange = new Vector2(100f, 200f);
     public Vector2 obstacleSpawnIntervalRange = new Vector2(10f, 25f);
 
+    [Header("Seed Settings")]
+    public bool useFixedSeed = false;
+    public int seedInput = 12345;
+    private int currentSeed = 0;
+
     private class Obstacle
     {
         public Vector2 position;
@@ -69,6 +74,13 @@ public class DinoGameWindow : EditorWindow
         obstacles.Clear();
         obstacleSpawnTimer = 0f;
         gameOver = false;
+        InitializeRandomSeed();
+    }
+
+    private void InitializeRandomSeed()
+    {
+        currentSeed = useFixedSeed ? seedInput : System.DateTime.Now.Millisecond;
+        Random.InitState(currentSeed);
     }
 
     private void UpdateGame()
@@ -156,6 +168,11 @@ public class DinoGameWindow : EditorWindow
 
     private void OnGUI()
     {
+        GUILayout.BeginHorizontal();
+        useFixedSeed = EditorGUILayout.Toggle("Use Fixed Seed", useFixedSeed);
+        seedInput = EditorGUILayout.IntField("Seed Input", seedInput);
+        EditorGUILayout.LabelField("Current Seed", currentSeed.ToString());
+        GUILayout.EndHorizontal();
         Event e = Event.current;
         if (e.type == EventType.KeyDown)
         {
