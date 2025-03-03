@@ -2850,6 +2850,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3530738785450962570, guid: 24d9bc513e333c94d832d8cd753b6578, type: 3}
+      propertyPath: <Player>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8599702784175029990, guid: 24d9bc513e333c94d832d8cd753b6578, type: 3}
       propertyPath: m_Name
       value: HoleObject

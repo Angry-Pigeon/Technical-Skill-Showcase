@@ -11,6 +11,8 @@ namespace Game.HoleLogic
         
         public float RotationEasing = 12f;
         
+        public bool IsPlayerControlled = false;
+        
         private void OnEnable()
         {
             joystick = GameLogic.Managers.GameEvents.Game.GetBootStrapperContext().Joystick;
@@ -18,7 +20,7 @@ namespace Game.HoleLogic
 
         private void Update()
         {
-            
+            if(!IsPlayerControlled) return;
             Vector3 direction = joystick.Direction;
 
             direction.z = direction.y;
