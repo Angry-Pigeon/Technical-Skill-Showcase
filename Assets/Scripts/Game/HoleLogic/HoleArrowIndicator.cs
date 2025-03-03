@@ -31,7 +31,12 @@ namespace Game.HoleLogic
             
             
             // Rotate the GameObject in world space.
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), RotationEasing * Time.deltaTime);
+            if (direction == Vector3.zero) return;
+            
+            Quaternion q = Quaternion.LookRotation(direction);
+            if(q == Quaternion.identity) return;
+            
+            transform.rotation = Quaternion.Slerp(transform.rotation, q, RotationEasing * Time.deltaTime);
 
         }
     }
