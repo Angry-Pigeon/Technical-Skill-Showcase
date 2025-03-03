@@ -8,7 +8,7 @@ public class GenericFolderStructerCreator
 {
     private static string[] GenericFolders = new string[]
     {
-        "Scripts",
+        "DinoGameWindow",
         "Materials",
         "Textures",
         "Prefabs",

@@ -89,8 +89,8 @@ namespace Game.GameLogic.Managers
         //     foreach (KeyValuePair<GameSaveType, SerializedSaveData> serializedSaveData in SaveSystem)
         //     {
         //         string accessorName = serializedSaveData.Key.ToString() + "Accessor";
-        //         string accessorPath = "Assets/Scripts/Game/GameLogic/Managers/SaveSystemAccessors/" + accessorName + ".cs";
-        //         string accessorContent = "using Tool_Development.SerializableScriptableObject.Scripts;\n" +
+        //         string accessorPath = "Assets/DinoGameWindow/Game/GameLogic/Managers/SaveSystemAccessors/" + accessorName + ".cs";
+        //         string accessorContent = "using Tool_Development.SerializableScriptableObject.DinoGameWindow;\n" +
         //                                  "namespace Game.GameLogic.Managers\n" +
         //                                  "{\n" +
         //                                  "    public class " + accessorName + " : SaveDataAccessor<SerializedSaveData>\n" +
