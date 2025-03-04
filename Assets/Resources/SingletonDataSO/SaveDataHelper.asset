@@ -15,13 +15,14 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 9cfaafd96c5daff4188133ecb7a2cc5d, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
     - Name: saveData
-      Entry: 6
-      Data: 
-  saveData: {fileID: 0}
+      Entry: 10
+      Data: 0
+  saveData: {fileID: 11400000, guid: 9cfaafd96c5daff4188133ecb7a2cc5d, type: 2}

@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: LevelSettings_Default
   m_EditorClassIdentifier: 
   <HoleData>k__BackingField: {fileID: 11400000, guid: 8964cf6f9f66b6c429ec633609479156, type: 2}
+  <LevelTimer>k__BackingField: 120
+  <LevelGoal>k__BackingField: 5

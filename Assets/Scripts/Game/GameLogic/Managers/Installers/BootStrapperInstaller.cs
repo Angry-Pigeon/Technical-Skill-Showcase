@@ -9,6 +9,7 @@ namespace Game.GameLogic.Managers
         public LevelLoadingManager LevelLoadingManager;
         public UIManager UIManager;
         public BootStrapperContext BootStrapperContext;
+        public LevelTimer.LevelTimer LevelTimer;
         
         public override void InstallBindings()
         {
@@ -17,6 +18,7 @@ namespace Game.GameLogic.Managers
             Container.Bind<LevelLoadingManager>().FromInstance(LevelLoadingManager).AsSingle();
             Container.Bind<UIManager>().FromInstance(UIManager).AsSingle();
             Container.Bind<BootStrapperContext>().FromInstance(BootStrapperContext).AsSingle();
+            Container.Bind<LevelTimer.LevelTimer>().FromInstance(LevelTimer).AsSingle();
         }
     }
 }

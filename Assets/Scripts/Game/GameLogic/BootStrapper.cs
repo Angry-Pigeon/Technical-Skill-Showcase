@@ -16,6 +16,8 @@ namespace Game.GameLogic
         private LevelLoadingManager _sceneLoaderManager;
         [Inject]
         private UIManager _uiManager;
+        [Inject]
+        private LevelTimer.LevelTimer _timerManager;
         
         [Inject]
         private BootStrapperContext bootStrapperContext;
@@ -41,6 +43,10 @@ namespace Game.GameLogic
         {
             yield return IE_Initialize();
             yield return IE_PostInitialize();
+            
+            StartCoroutine(IE_Tick());
+            StartCoroutine(IE_FixedTick());
+            StartCoroutine(IE_LateTick());
         }
         
         private IEnumerator IE_Initialize()
@@ -50,7 +56,8 @@ namespace Game.GameLogic
             {
                 _saveSystemManager,
                 _sceneLoaderManager,
-                _uiManager
+                _uiManager,
+                _timerManager,
             };
             _managers.Sort((a, b) => a.Priority.CompareTo(b.Priority));
             
@@ -75,17 +82,30 @@ namespace Game.GameLogic
         
         private IEnumerator IE_Tick()
         {
-            yield return IE_TickManagers();
+            while (true)
+            {
+                yield return IE_TickManagers();
+                yield return null;
+            }
+            
         }
         
         private IEnumerator IE_FixedTick()
         {
-            yield return IE_FixedTickManagers();
+            while (true)
+            {
+                yield return IE_FixedTickManagers();
+                yield return new WaitForFixedUpdate();
+            }
         }
         
         private IEnumerator IE_LateTick()
         {
-            yield return IE_LateTickManagers();
+            while (true)
+            {
+                yield return IE_LateTickManagers();
+                yield return new WaitForEndOfFrame();
+            }
         }
         
         private void Dispose()
@@ -111,32 +131,42 @@ namespace Game.GameLogic
         
         private IEnumerator IE_PauseManagers()
         {
-            yield return _saveSystemManager.Pause();
-            yield return _sceneLoaderManager.Pause();
+            foreach (var manager in _managers)
+            {
+                yield return manager.Pause();
+            }
         }
         
         private IEnumerator IE_ResumeManagers()
         {
-            yield return _saveSystemManager.Resume();
-            yield return _sceneLoaderManager.Resume();
+            foreach (var manager in _managers)
+            {
+                yield return manager.Resume();
+            }
         }
         
         private IEnumerator IE_TickManagers()
         {
-            yield return _saveSystemManager.Tick();
-            yield return _sceneLoaderManager.Tick();
+            foreach (var manager in _managers)
+            {
+                yield return manager.Tick();
+            }
         }
         
         private IEnumerator IE_FixedTickManagers()
         {
-            yield return _saveSystemManager.FixedTick();
-            yield return _sceneLoaderManager.FixedTick();
+            foreach (var manager in _managers)
+            {
+                yield return manager.FixedTick();
+            }
         }
         
         private IEnumerator IE_LateTickManagers()
         {
-            yield return _saveSystemManager.LateTick();
-            yield return _sceneLoaderManager.LateTick();
+            foreach (var manager in _managers)
+            {
+                yield return manager.LateTick();
+            }
         }
         
         private void DisposeManagers()
@@ -166,6 +196,9 @@ namespace Game.GameLogic
             _uiManager.ShowPanel(UIPanelType.GamePanel);
             _uiManager.ShowPanel(UIPanelType.SettingsPanel, false);
             
+            
+            _timerManager.StartTimer(_sceneLoaderManager.GetCurrentlyLoadedLevelData());
+            
 
         }
 
@@ -184,7 +217,10 @@ namespace Game.GameLogic
             
             _uiManager.ShowPanel(UIPanelType.GamePanel);
             _uiManager.ShowPanel(UIPanelType.SettingsPanel, false);
+            
+            _timerManager.StartTimer(_sceneLoaderManager.GetCurrentlyLoadedLevelData());
         }
+        
         public void RestartLevel()
         {
             StartCoroutine(IE_RestartLevel());
@@ -203,6 +239,8 @@ namespace Game.GameLogic
             
             _uiManager.ShowPanel(UIPanelType.GamePanel);
             _uiManager.ShowPanel(UIPanelType.SettingsPanel, false);
+            
+            _timerManager.StartTimer(_sceneLoaderManager.GetCurrentlyLoadedLevelData());
         }
 
 

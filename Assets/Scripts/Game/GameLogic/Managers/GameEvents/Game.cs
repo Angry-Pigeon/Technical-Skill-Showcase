@@ -1,10 +1,13 @@
-﻿using Zenject;
+﻿using Testing.HoleSystem.Scripts.HoleLogic;
+using Zenject;
 namespace Game.GameLogic.Managers.GameEvents
 {
     public static class Game
     {
         
         private static BootStrapper _bootStrapper;
+        
+        public static HoleEatLogicController Player { get; private set; }
         
         public static void Initialize(BootStrapper bootStrapper)
         {
@@ -39,6 +42,14 @@ namespace Game.GameLogic.Managers.GameEvents
         public static BootStrapperContext GetBootStrapperContext()
         {
             return _bootStrapper.GetBootStrapperContext();
+        }
+
+        public static void SetAsPlayer(this HoleEatLogicController controller)
+        {
+            if (controller.Player)
+            {
+                Player = controller;
+            }
         }
     }
 }

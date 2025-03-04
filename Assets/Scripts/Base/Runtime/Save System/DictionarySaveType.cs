@@ -19,7 +19,10 @@ namespace Tool_Development.SerializableScriptableObject.Scripts
                 keys[i] = key.ToString();
                 i++;
             }
+            #if UNITY_EDITOR
             EnumCreator.CreateEnum(SaveName, keys, false, Prefix, Suffix);
+
+            #endif
             base.CreateEnums();
         }
 

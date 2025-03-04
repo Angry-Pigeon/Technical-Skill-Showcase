@@ -2,6 +2,7 @@
 using DG.Tweening;
 using Game.EatableObjects;
 using Game.GameLogic;
+using Game.GameLogic.Managers.GameEvents;
 using Testing.HoleSystem.Scripts.HoleCreation;
 using UnityEngine;
 
@@ -59,6 +60,10 @@ namespace Testing.HoleSystem.Scripts.HoleLogic
 
         public void Initialize()
         {
+            if (Player)
+            {
+                this.SetAsPlayer();
+            }
             startSize = transform.localScale;
             GetCurrentHoleData();
             HoleEatableCounter.OnObjectEaten += OnObjectEaten;

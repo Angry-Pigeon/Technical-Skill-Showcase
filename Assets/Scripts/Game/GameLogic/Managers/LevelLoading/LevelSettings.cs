@@ -8,13 +8,16 @@ namespace Game.GameLogic
         [field: SerializeField]
         public HoleData HoleData { get; private set; }
 
+        [field: SerializeField]
+        public float LevelTimer { get; private set; }
+
+        [field: SerializeField]
+        public int LevelGoal { get; private set; }
+
         public HoleData GetHoleData()
         {
             return HoleData;
         }
-
-
-
 
     }
 }

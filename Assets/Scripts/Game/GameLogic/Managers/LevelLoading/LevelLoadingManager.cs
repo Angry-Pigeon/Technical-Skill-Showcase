@@ -57,6 +57,11 @@ namespace Game.GameLogic.Managers
             State = ManagerState.Disposed;    
         }
         
+        public LevelSettingsData GetCurrentlyLoadedLevelData()
+        {
+            return LevelSettingsDatabase.GetLevelSettingCycle(_saveSystemManager.GetSaveData<GameDataSave>(GameSaveType.GameData).Level);
+        }
+        
         public IEnumerator IE_LoadLevel(int levelIndex)
         {
             ClearLevel();

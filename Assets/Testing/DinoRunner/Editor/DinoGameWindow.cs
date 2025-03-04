@@ -33,6 +33,9 @@ public class DinoGameWindow : EditorWindow
     public int seedInput = 12345;
     private int currentSeed = 0;
 
+    [Header("Game Start")]
+    private bool gameStarted = false;
+
     private class Obstacle
     {
         public Vector2 position;
@@ -75,6 +78,7 @@ public class DinoGameWindow : EditorWindow
         obstacleSpawnTimer = 0f;
         gameOver = false;
         InitializeRandomSeed();
+        lastRepaintTime = EditorApplication.timeSinceStartup;
     }
 
     private void InitializeRandomSeed()
@@ -85,6 +89,10 @@ public class DinoGameWindow : EditorWindow
 
     private void UpdateGame()
     {
+        if (!gameStarted)
+        {
+         return;
+        }
         double currentTime = EditorApplication.timeSinceStartup;
         if (currentTime - lastRepaintTime >= 1.0 / desiredFPS)
         {
@@ -173,42 +181,63 @@ public class DinoGameWindow : EditorWindow
         seedInput = EditorGUILayout.IntField("Seed Input", seedInput);
         EditorGUILayout.LabelField("Current Seed", currentSeed.ToString());
         GUILayout.EndHorizontal();
-        Event e = Event.current;
-        if (e.type == EventType.KeyDown)
+        if (!gameStarted)
         {
-            if (e.keyCode == KeyCode.Space && !isJumping && !gameOver)
+            GUIStyle startStyle = new GUIStyle(EditorStyles.boldLabel);
+            startStyle.fontSize = 32;
+            startStyle.alignment = TextAnchor.MiddleCenter;
+            GUI.Label(new Rect(0, (position.height - 40) / 2, position.width, 40), "Press Space to Start", startStyle);
+            float groundLineY = position.height - 50;
+            float dinoSize = 50;
+            float dinoX = 50;
+            float dinoY = groundLineY - dinoSize - dinoYPos;
+            GUI.Box(new Rect(dinoX, dinoY, dinoSize, dinoSize), "Dino");
+            Event startEvent = Event.current;
+            if (startEvent.type == EventType.KeyDown && startEvent.keyCode == KeyCode.Space)
+            {
+                gameStarted = true;
+                ResetGame();
+            }
+            return;
+        }
+        Event evt = Event.current;
+        if (evt.type == EventType.KeyDown)
+        {
+            if (evt.keyCode == KeyCode.Space && !isJumping && !gameOver)
             {
                 isJumping = true;
                 jumpHeld = true;
                 jumpHoldTime = 0f;
                 dinoVelocity = jumpForce;
             }
-            else if (e.keyCode == KeyCode.R && gameOver)
+            else if (evt.keyCode == KeyCode.R && gameOver)
             {
                 ResetGame();
             }
         }
-        else if (e.type == EventType.KeyUp)
+        else if (evt.type == EventType.KeyUp)
         {
-            if (e.keyCode == KeyCode.Space)
+            if (evt.keyCode == KeyCode.Space)
                 jumpHeld = false;
         }
-        float groundLineY = position.height - 50;
-        GUI.Box(new Rect(0, groundLineY, position.width, 5), GUIContent.none);
-        float dinoSize = 50;
-        float dinoX = 50;
-        float dinoY = groundLineY - dinoSize - dinoYPos;
-        GUI.Box(new Rect(dinoX, dinoY, dinoSize, dinoSize), "Dino");
+        float groundYPos = position.height - 50;
+        GUI.Box(new Rect(0, groundYPos, position.width, 5), GUIContent.none);
+        float dinoSize2 = 50;
+        float dinoX2 = 50;
+        float dinoY2 = groundYPos - dinoSize2 - dinoYPos;
+        GUI.Box(new Rect(dinoX2, dinoY2, dinoSize2, dinoSize2), "Dino");
         foreach (var obs in obstacles)
             GUI.Box(new Rect(obs.position.x, obs.position.y, obs.size, obs.size), obs.isFlying ? "Fly" : "Obs");
         GUI.Label(new Rect(10, 10, 200, 30), "Score: " + Mathf.FloorToInt(score));
         GUI.Label(new Rect(10, 40, 200, 30), "Highscore: " + highscore);
-        Rect dinoRect = new Rect(dinoX, dinoY, dinoSize, dinoSize);
+        Rect dinoRect = new Rect(dinoX2, dinoY2, dinoSize2, dinoSize2);
         foreach (var obs in obstacles)
         {
             Rect obsRect = new Rect(obs.position.x, obs.position.y, obs.size, obs.size);
             if (dinoRect.Overlaps(obsRect))
+            {
                 gameOver = true;
+            }
         }
         if (gameOver)
         {
