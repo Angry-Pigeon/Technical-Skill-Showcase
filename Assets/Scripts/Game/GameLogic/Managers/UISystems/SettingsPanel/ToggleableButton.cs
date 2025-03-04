@@ -5,23 +5,22 @@ namespace Game.GameLogic.Managers.UISystems.SettingsPanel
 {
     public class ToggleableButton : MonoBehaviour
     {
-        [field: SerializeField]
-        public Sprite OnSprite { get; private set; }
 
         [field: SerializeField]
-        public Sprite OffSprite { get; private set; }
+        public Image OffSprite { get; private set; }
 
         protected Button button;
         
         protected bool isOn = true;
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             button = GetComponent<Button>();
             button.onClick.AddListener(OnButtonClicked);
+            OffSprite.enabled = !isOn;
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             button.onClick.RemoveListener(OnButtonClicked);
         }
@@ -29,7 +28,7 @@ namespace Game.GameLogic.Managers.UISystems.SettingsPanel
         protected virtual void OnButtonClicked()
         {
             isOn = !isOn;
-            button.image.sprite = isOn ? OnSprite : OffSprite;
+            OffSprite.enabled = !isOn;
         }
 
     }

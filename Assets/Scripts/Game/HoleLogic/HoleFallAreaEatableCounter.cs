@@ -2,6 +2,7 @@
 using System.Collections;
 using Game.EatableObjects;
 using JetBrains.Annotations;
+using Lofelt.NiceVibrations;
 using UnityEngine;
 namespace Testing.HoleSystem.Scripts.HoleCreation
 {
@@ -42,6 +43,15 @@ namespace Testing.HoleSystem.Scripts.HoleCreation
             {
                 yield return new WaitForSeconds(0.1f);
             }
+            if (eatableObject.Experience < 5)
+            {
+                HapticPatterns.PlayPreset(HapticPatterns.PresetType.LightImpact);
+            }
+            else
+            {
+                HapticPatterns.PlayPreset(HapticPatterns.PresetType.MediumImpact);
+            }
+            
             OnObjectEaten?.Invoke(eatableObject);
             
             Destroy(eatableObject.gameObject);
